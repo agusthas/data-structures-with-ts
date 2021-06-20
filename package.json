@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "tsc": "tsc",
+    "tsc:watch": "tsc --watch --noEmit",
     "test": "jest",
     "jest:watch": "jest --watch"
   },
