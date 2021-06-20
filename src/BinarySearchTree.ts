@@ -1,7 +1,20 @@
 import BinarySearchTreeNode from './BinarySearchTreeNode';
 
+/**
+ * Class representing a Binary Search Tree.
+ * @requires {@link BinarySearchTreeNode}
+ * @example
+ * // creates an instance of an BST with numbers as key
+ * const bst = new BinarySearchTree<number>();
+ * // with a string as key
+ * const bst = new BinarySearchTree<string>();
+ *
+ * // limit the value to only a string value
+ * const bst = new BinarySearchTree<number , string>();
+ */
 export default class BinarySearchTree<T extends number | string, U = any> {
   private _root: BinarySearchTreeNode<T, U> | null;
+
   private _count: number;
 
   constructor() {
@@ -9,7 +22,13 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     this._count = 0;
   }
 
-  insert(key: T, value?: U) {
+  /**
+   * Inserts a node with a key/value into the tree
+   * @param key
+   * @param value
+   * @returns {BinarySearchTreeNode<T,U>}
+   */
+  insert(key: T, value?: U): BinarySearchTreeNode<T, U> {
     const newNode = new BinarySearchTreeNode<T, U>(key, value as U);
 
     const insertion = (current: BinarySearchTreeNode<T, U>) => {
@@ -42,7 +61,12 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     return newNode;
   }
 
-  has(key: T) {
+  /**
+   * Checks if a value exists in the tree by its key
+   * @param key
+   * @returns {boolean}
+   */
+  has(key: T): boolean {
     const hasRecursive = (
       current: BinarySearchTreeNode<T, U> | null
     ): boolean => {
@@ -64,7 +88,12 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     return hasRecursive(this._root);
   }
 
-  find(key: T) {
+  /**
+   * Find a node by its key. If node isn't found, will return `null`.
+   * @param key
+   * @returns {BinarySearchTreeNode<T,U> | null}
+   */
+  find(key: T): BinarySearchTreeNode<T, U> | null {
     const findRecursive = (
       current: BinarySearchTreeNode<T, U> | null
     ): BinarySearchTreeNode<T, U> | null => {
@@ -86,6 +115,11 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     return findRecursive(this._root);
   }
 
+  /**
+   * Finds node with max key (most-right) in the tree
+   * @param current
+   * @returns {BinarySearchTreeNode<T,U> | null}
+   */
   max(
     current: BinarySearchTreeNode<T, U> | null = this._root
   ): BinarySearchTreeNode<T, U> | null {
@@ -100,6 +134,11 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     return current;
   }
 
+  /**
+   * Finds node with min key (most-left) in the tree
+   * @param current
+   * @returns {BinarySearchTreeNode<T,U> | null}
+   */
   min(
     current: BinarySearchTreeNode<T, U> | null = this._root
   ): BinarySearchTreeNode<T, U> | null {
@@ -114,18 +153,27 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     return current;
   }
 
+  /**
+   * Returns the root (most-top) node
+   * @returns {BinarySearchTreeNode<T,U> | null}
+   */
   root(): BinarySearchTreeNode<T, U> | null {
     return this._root;
   }
 
+  /**
+   * Returns the number of nodes in the tree
+   * @returns {number}
+   */
   count(): number {
     return this._count;
   }
 
   /**
-   * Remove a node by its key
+   * Remove a node by its key. Returns true if node successfully removed, false otherwise.
+   * @returns {boolean}
    */
-  remove(key: T) {
+  remove(key: T): boolean {
     const removeRecursively = (
       k: T,
       current: BinarySearchTreeNode<T, U> | null
@@ -196,10 +244,16 @@ export default class BinarySearchTree<T extends number | string, U = any> {
     return removeRecursively(key, this._root);
   }
 
+  /**
+   * Traverses tree in _type_-order, and applying callback function for each node.
+   * @param {'in' | 'pre' | 'post'} type - Traversal type.
+   * @param cb - A callback function that will be applied for each node.
+   * @returns {void}
+   */
   traverse(
     type: 'in' | 'pre' | 'post',
     cb: (node: BinarySearchTreeNode<T, U>) => void
-  ) {
+  ): void {
     const traverseInOrder = (current: BinarySearchTreeNode<T, U> | null) => {
       if (current === null) return;
       traverseInOrder(current.getLeft());
@@ -241,8 +295,9 @@ export default class BinarySearchTree<T extends number | string, U = any> {
 
   /**
    * Reset the field of tree / Clear the tree
+   * @returns {void}
    */
-  clear() {
+  clear(): void {
     this._root = null;
     this._count = 0;
   }
