@@ -1,4 +1,4 @@
-import Stack from '../Stack';
+import Stack from './Stack';
 
 describe('stack tests', () => {
   const stack = new Stack<number | string>();
