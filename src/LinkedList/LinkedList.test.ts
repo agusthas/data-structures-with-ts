@@ -1,4 +1,4 @@
-import LinkedListNode from './LinkedListNode'; // For the types
+import { LLNode } from './LinkedListNode'; // For the types
 import { LinkedList, LinkedListSort } from './LinkedList';
 
 describe('LinkedList unit test', () => {
@@ -155,10 +155,10 @@ describe('LinkedList unit test', () => {
 
   describe('.filter(cb)', () => {
     let flag: (a: number) => boolean;
-    const tests = (a: LinkedListNode<number>) => {
+    const tests = (a: LLNode<number>) => {
       expect(flag(a.getValue())).toBe(true);
     };
-    const filterCb = (n: LinkedListNode<number>) => flag(n.getValue());
+    const filterCb = (n: LLNode<number>) => flag(n.getValue());
 
     const testsLL = () => {
       const filtered = LL_Prefilled.filter(filterCb);

@@ -1,4 +1,4 @@
-import LinkedListNode from './LinkedListNode';
+import LinkedListNode, { Node, LLNode } from './LinkedListNode';
 
 abstract class LLTemplate<T> {
   protected _head: LinkedListNode<T> | null;
@@ -9,18 +9,30 @@ abstract class LLTemplate<T> {
     this._count = 0;
   }
 
+  /**
+   * Checks if the current List is empty.
+   */
   isEmpty(): boolean {
     return this._head === null;
   }
 
-  head(): LinkedListNode<T> | null {
+  /**
+   * Returns the head of List.
+   */
+  head(): Node<T> {
     return this._head;
   }
 
+  /**
+   * Returns the count of nodes in the list.
+   */
   count(): number {
     return this._count;
   }
 
+  /**
+   * Returns the remaining elements as an array.
+   */
   toArray(): T[] {
     if (this.isEmpty()) {
       return [];
@@ -37,7 +49,10 @@ abstract class LLTemplate<T> {
     return holder;
   }
 
-  removeFirst(): LinkedListNode<T> | null {
+  /**
+   * Remove the first element and returns it.
+   */
+  removeFirst(): Node<T> {
     if (this.isEmpty()) {
       return null;
     }
@@ -49,7 +64,10 @@ abstract class LLTemplate<T> {
     return removed.setNext(null);
   }
 
-  removeLast() {
+  /**
+   * Remove the last element and returns it.
+   */
+  removeLast(): Node<T> {
     if (this.isEmpty()) {
       return null;
     }
@@ -73,7 +91,12 @@ abstract class LLTemplate<T> {
     return curr!;
   }
 
-  removeAt(pos: number) {
+  /**
+   * Insert an element at given position, and returns it.
+   * Position should be in range of the list, if given otherwise will throw an error.
+   * @param pos - Position where the elements will be inserted to. Head is always in position 0.
+   */
+  removeAt(pos: number): Node<T> {
     if (pos < 0 || pos > this.count() - 1) {
       throw new RangeError('Invalid position!');
     }
@@ -104,7 +127,11 @@ abstract class LLTemplate<T> {
     return curr.setNext(null);
   }
 
-  forEach(cb: (node: LinkedListNode<T>, pos: number) => unknown): void {
+  /**
+   * Traverse the list and applying callback function for each node.
+   * @param cb - Callback function
+   */
+  forEach(cb: (node: LLNode<T>, pos: number) => unknown): void {
     let curr = this._head;
     let currPos = 0;
     while (curr) {
@@ -114,9 +141,11 @@ abstract class LLTemplate<T> {
     }
   }
 
-  find(
-    cb: (node: LinkedListNode<T>, pos: number) => unknown
-  ): LinkedListNode<T> | null {
+  /**
+   * Find the _first_ node that meets the condition specified in the callback function.
+   * @param cb - Callback function.
+   */
+  find(cb: (node: LLNode<T>, pos: number) => unknown): Node<T> {
     let curr = this._head;
     let currPos = 0;
     while (curr) {
@@ -130,14 +159,19 @@ abstract class LLTemplate<T> {
     return null;
   }
 
-  abstract filter(
-    cb: (node: LinkedListNode<T>, pos: number) => unknown
-  ): LLTemplate<T>;
+  /**
+   * Returns a new instance with filtered nodes that meets the condition specified in the callback function.
+   * @param cb - Callback function.
+   */
+  abstract filter(cb: (node: LLNode<T>, pos: number) => unknown): LLTemplate<T>;
 
-  reverse() {
+  /**
+   * Reverse elements of the array and returns the head pointer. Calling this function will **mutate** the list.
+   */
+  reverse(): LLTemplate<T> {
     let curr = this._head;
-    let next: LinkedListNode<T> | null = null;
-    let prev: LinkedListNode<T> | null = null;
+    let next: Node<T> = null;
+    let prev: Node<T> = null;
     while (curr) {
       // save the next
       next = curr.getNext();
@@ -152,6 +186,9 @@ abstract class LLTemplate<T> {
     return this;
   }
 
+  /**
+   * Clears the list.
+   */
   clear(): void {
     this._head = null;
     this._count = 0;
@@ -163,13 +200,22 @@ export class LinkedList<T> extends LLTemplate<T> {
     super();
   }
 
-  prepend(value: T): LinkedListNode<T> {
+  /**
+   * Insert a value as node on the front of the list and returns it.
+   * @param value - Value to be inserted
+   */
+  prepend(value: T): LLNode<T> {
     this._head = new LinkedListNode<T>(value, this._head);
     this._count++;
     return this._head!;
   }
 
-  append(value: T, lastNode?: LinkedListNode<T>): LinkedListNode<T> {
+  /**
+   * Insert a value as node on the back of the list and returns it. If the lastNode is specified, it will reduce the time it needs to insert.
+   * @param value - Value to be inserted
+   * @param lastNode - (Optional) The last element of the Lists
+   */
+  append(value: T, lastNode?: LLNode<T>): LLNode<T> {
     if (this.isEmpty()) {
       return this.prepend(value);
     }
@@ -194,21 +240,26 @@ export class LinkedList<T> extends LLTemplate<T> {
     return current.getNext()!;
   }
 
-  insertAt(pos: number, value: T): LinkedListNode<T> {
+  /**
+   * Insert a value as node in given position and returns it.
+   * @param pos - Position to be inserted. Head always start at 0.
+   * @param value - Value to be inserted.
+   */
+  insertAt(pos: number, value: T): LLNode<T> {
     if (pos < 0 || pos > this.count()) {
       throw new RangeError('Invalid position!');
     }
 
     if (this.isEmpty()) {
-      return this.prepend(value);
+      return this.prepend(value)!;
     }
 
     if (pos === 0) {
-      return this.prepend(value);
+      return this.prepend(value)!;
     }
 
     if (pos === this.count()) {
-      return this.append(value);
+      return this.append(value)!;
     }
 
     let currentPos = 1;
@@ -224,7 +275,7 @@ export class LinkedList<T> extends LLTemplate<T> {
     return prev.getNext()!;
   }
 
-  filter(cb: (node: LinkedListNode<T>, pos: number) => unknown) {
+  filter(cb: (node: LLNode<T>, pos: number) => unknown) {
     // creates a new Linked List
     const filtered = new LinkedList<T>();
 
@@ -247,11 +298,15 @@ export class LinkedListSort<T extends number | string> extends LLTemplate<T> {
     super();
   }
 
-  insert(value: T) {
+  /**
+   * Sorted insert of value as node and returns it.
+   * @param value - Value to be inserted
+   */
+  insert(value: T): LLNode<T> {
     return this.sortedInsert(new LinkedListNode<T>(value));
   }
 
-  private sortedInsert(newNode: LinkedListNode<T>) {
+  private sortedInsert(newNode: LinkedListNode<T>): LLNode<T> {
     let temp = new LinkedListNode<any>(undefined);
     let current = temp;
     temp.setNext(this._head);
@@ -267,10 +322,10 @@ export class LinkedListSort<T extends number | string> extends LLTemplate<T> {
     current.setNext(newNode);
     this._head = temp.getNext();
     this._count++;
-    return this._head;
+    return this._head!;
   }
 
-  filter(cb: (node: LinkedListNode<T>, pos: number) => unknown) {
+  filter(cb: (node: LinkedListNode<T>, pos: number) => unknown): LLTemplate<T> {
     // creates a new Linked List
     const filtered = new LinkedListSort<T>();
 
