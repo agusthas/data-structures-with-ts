@@ -1,4 +1,4 @@
-export class DoublyNode<T> {
+export default class DoublyNode<T> {
   private _data: T;
   private _prev: DoublyNode<T> | null;
   private _next: DoublyNode<T> | null;

@@ -1,4 +1,4 @@
-import { DoublyNode } from './DoublyNode';
+import DoublyNode from './DoublyNode';
 
 describe('DoublyNode unit tests', () => {
   const n1 = new DoublyNode<number>(1);
