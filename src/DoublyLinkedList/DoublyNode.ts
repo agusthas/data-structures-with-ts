@@ -1,3 +1,4 @@
+export type Node<T> = DoublyNode<T> | null;
 export default class DoublyNode<T> {
   private _data: T;
   private _prev: DoublyNode<T> | null;
