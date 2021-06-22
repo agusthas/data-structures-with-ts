@@ -1,17 +1,25 @@
 {
-  "name": "typescript-jest",
+  "name": "data-structures-with-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "Data Structures with TypeScripts",
   "main": "app.js",
   "scripts": {
-    "tsc": "tsc",
     "ts-node": "ts-node src/app.ts",
     "test": "jest",
-    "jest:watch": "jest --watch"
+    "dev": "jest --watch",
+    "build": "npm run test && tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "data-structures",
+    "typescript"
+  ],
+  "author": {
+    "name": "SuzuMantan",
+    "url": "https://github.com/agusthas",
+    "email": "suzumantan@gmail.com"
+  },
+  "homepage": "https://github.com/agusthas/data-structures-TS",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.3",
