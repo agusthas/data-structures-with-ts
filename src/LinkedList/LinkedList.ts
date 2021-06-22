@@ -195,7 +195,7 @@ abstract class LLTemplate<T> {
   }
 }
 
-export class LinkedList<T> extends LLTemplate<T> {
+export default class LinkedList<T> extends LLTemplate<T> {
   constructor() {
     super();
   }

@@ -1,5 +1,4 @@
-import BinarySearchTreeNode from './BinarySearchTreeNode';
-import BinarySearchTree from './BinarySearchTree';
+import { BinarySearchTree, BinarySearchTreeNode } from '../BinarySearchTree';
 
 describe('BST Tests', () => {
   const bst = new BinarySearchTree<number, string | undefined>();
