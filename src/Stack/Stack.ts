@@ -1,16 +1,17 @@
 /**
  * Class representing a Stack
- *
- * @example
+ * ```javascript
  * // returns an empty stack
  * const stack = new Stack();
  * // returns a stack with given array as elements
  * const stack = new Stack([1, 2, 3, 4, 5]);
- *
+ * ```
+ *```typescript
  * // returns an empty stack
  * const stack = new Stack<number>();
  * // returns a stack with given array as elements
  * const stack = new Stack<number>([1, 2, 3, 4, 5]);
+ * ```
  */
 export default class Stack<T = unknown> {
   /**
@@ -69,7 +70,6 @@ export default class Stack<T = unknown> {
   /**
    * Creates a shallow copy from the stack.
    * @public
-   * @returns {Stack<T>}
    */
   clone(): Stack<T> {
     return new Stack([...this._elements]);
@@ -87,7 +87,6 @@ export default class Stack<T = unknown> {
   /**
    * Returns elements as an array.
    * @public
-   * @returns {T[]}
    */
   toArray(): T[] {
     return [...this._elements];
@@ -104,13 +103,16 @@ export default class Stack<T = unknown> {
 
   /**
    * Creates a stack from an existing array
-   * @example
+   *
+   * ```typescript
    * const list = [1, 2, 3, 4];
    * const stack = Stack.fromArray(list); // Returns an instance of Stack with `list` as elements
    *
    * // If mutating the inputted array is a no, then create a shallow copy for the array
    * const stack = Stack.fromArray([...list]); // or
    * const stack = Stack.fromArray(list.slice(1));
+   * ```
+   *
    * @static
    * @returns {Stack<A>}
    */

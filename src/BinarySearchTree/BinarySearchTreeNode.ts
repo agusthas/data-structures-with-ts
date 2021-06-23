@@ -1,8 +1,9 @@
 /**
  * Class representing a BST Node
- * @example
+ * ```typescript
  * // creates a node with given key, and value
  * const node = new BinarySearchTreeNode(2, 'hello');
+ * ```
  */
 export default class BinarySearchTreeNode<T extends number | string, U = any> {
   /**

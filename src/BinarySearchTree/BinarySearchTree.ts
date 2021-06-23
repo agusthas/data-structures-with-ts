@@ -3,7 +3,7 @@ import BinarySearchTreeNode from './BinarySearchTreeNode';
 /**
  * Class representing a Binary Search Tree.
  * @requires {@link BinarySearchTreeNode}
- * @example
+ * ```typescript
  * // creates an instance of an BST with numbers as key
  * const bst = new BinarySearchTree<number>();
  * // with a string as key
@@ -11,6 +11,7 @@ import BinarySearchTreeNode from './BinarySearchTreeNode';
  *
  * // limit the value to only a string value
  * const bst = new BinarySearchTree<number , string>();
+ * ```
  */
 export default class BinarySearchTree<T extends number | string, U = any> {
   private _root: BinarySearchTreeNode<T, U> | null;
