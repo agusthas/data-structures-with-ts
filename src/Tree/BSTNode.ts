@@ -1,199 +1,44 @@
-/**
- * Class representing a BST Node
- * ```typescript
- * // creates a node with given key, and value
- * const node = new BinarySearchTreeNode(2, 'hello');
- * ```
- */
 export default class BSTNode<T extends number | string, U = undefined> {
-  /**
-   * Key representing the hiearchy
-   * @protected
-   */
   protected _key: T;
+  protected _left: BSTNode<T, U> | null = null;
+  protected _right: BSTNode<T, U> | null = null;
+  protected _parent: BSTNode<T, U> | null = null; // butuh parent biar bisa return lebih flexible nanti nya di tree;
+  public value: U;
 
-  /**
-   * Value of the node
-   * @protected
-   */
-  protected _value: U;
-
-  /** Left child node
-   * @protected
-   */
-  protected _left: BSTNode<T, U> | null;
-
-  /** Right child node
-   * @protected
-   */
-  protected _right: BSTNode<T, U> | null;
-
-  /** Parent node
-   * @protected
-   */
-  protected _parent: BSTNode<T, U> | null;
-
-  /**
-   * Creates a nodeb
-   * @constructor
-   * @param key - Key of node
-   * @param value - Value of node
-   */
   constructor(key: T, value: U) {
     this._key = key;
-    this._value = value;
-    this._left = null;
-    this._right = null;
-    this._parent = null;
+    this.value = value;
   }
 
-  /**
-   * Set node key and returns the instance.
-   * @public
-   * @param key - New node key.
-   * @returns {BSTNode<T, U>}
-   */
-  setKey(key: T): BSTNode<T, U> {
+  public set key(key: T) {
     this._key = key;
-    return this;
   }
 
-  /**
-   * Gets node key
-   * @public
-   * @returns {T}
-   */
-  getKey(): T {
+  public get key() {
     return this._key;
   }
 
-  /**
-   * Sets node value and returns the instance.
-   * @public
-   * @param value - New node value.
-   * @returns {BSTNode<T, U>}
-   */
-  setValue(value: U): BSTNode<T, U> {
-    this._value = value;
-    return this;
+  public set parent(parent: BSTNode<T, U> | null) {
+    this._parent = parent;
   }
 
-  /**
-   * Gets node value
-   * @public
-   * @returns {U}
-   */
-  getValue(): U {
-    return this._value;
-  }
-
-  /**
-   * Set left child node and returns the instance.
-   * @param left - New Node to be inserted to the left, if given a node does not match type will throw an error.
-   */
-  setLeft(left: BSTNode<T, U> | null): BSTNode<T, U> {
-    if (left && !(left instanceof BSTNode)) {
-      throw new Error('setLeft expects a BSTNode or null');
-    }
-
-    this._left = left || null;
-    return this;
-  }
-
-  /**
-   * Returns the left child
-   * @public
-   * @returns {BSTNode<T, U> | null}
-   */
-  getLeft(): BSTNode<T, U> | null {
-    return this._left;
-  }
-
-  /**
-   * Checks if node has a left child
-   * @public
-   * @returns {boolean}
-   */
-  hasLeft(): boolean {
-    return this._left instanceof BSTNode;
-  }
-
-  /**
-   * Set right child node and returns the instance.
-   * @param right - New Node to be inserted to the right, if given a node does not match type will throw an error.
-   */
-  setRight(right: BSTNode<T, U> | null): BSTNode<T, U> {
-    if (right && !(right instanceof BSTNode)) {
-      throw new Error('setright expects a BSTNode or null');
-    }
-
-    this._right = right || null;
-    return this;
-  }
-
-  /**
-   * Returns the right child
-   * @public
-   * @returns {BSTNode<T, U> | null}
-   */
-  getRight(): BSTNode<T, U> | null {
-    return this._right;
-  }
-
-  /**
-   * Checks if node has a right child
-   * @public
-   * @returns {boolean}
-   */
-  hasRight(): boolean {
-    return this._right instanceof BSTNode;
-  }
-
-  /**
-   * Set parent node and returns the instance.
-   * @param parent - New Node to be inserted to the parent, if given a node does not match type will throw an error.
-   */
-  setParent(parent: BSTNode<T, U> | null): BSTNode<T, U> {
-    if (parent && !(parent instanceof BSTNode)) {
-      throw new Error('setparent expects a BSTNode or null');
-    }
-
-    this._parent = parent || null;
-    return this;
-  }
-
-  /**
-   * Returns the parent
-   * @public
-   * @returns {BSTNode<T, U> | null}
-   */
-  getParent(): BSTNode<T, U> | null {
+  public get parent() {
     return this._parent;
   }
 
-  /**
-   * Checks if node has a parent
-   * @public
-   * @returns {boolean}
-   */
-  hasParent(): boolean {
-    return this._parent instanceof BSTNode;
+  public set left(left: BSTNode<T, U> | null) {
+    this._left = left;
   }
 
-  /**
-   * Checks if node right now is a root
-   * @public
-   * @returns {boolean}
-   */
-  isRoot(): boolean {
-    return this._parent === null;
+  public get left() {
+    return this._left;
   }
 
-  /** Checks if node is a leaf (no children)
-   * @public
-   * @returns {boolean}
-   */
-  isLeaf(): boolean {
-    return !this.hasLeft() && !this.hasRight();
+  public set right(right: BSTNode<T, U> | null) {
+    this._right = right;
+  }
+
+  public get right() {
+    return this._right;
   }
 }
