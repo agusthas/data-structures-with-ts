@@ -5,33 +5,33 @@
  * const node = new BinarySearchTreeNode(2, 'hello');
  * ```
  */
-export default class BSTNode<T extends number | string, U = any> {
+export default class BSTNode<T extends number | string, U = undefined> {
   /**
    * Key representing the hiearchy
-   * @private
+   * @protected
    */
-  private _key: T;
+  protected _key: T;
 
   /**
    * Value of the node
-   * @private
+   * @protected
    */
-  private _value: U;
+  protected _value: U;
 
   /** Left child node
-   * @private
+   * @protected
    */
-  private _left: BSTNode<T, U> | null;
+  protected _left: BSTNode<T, U> | null;
 
   /** Right child node
-   * @private
+   * @protected
    */
-  private _right: BSTNode<T, U> | null;
+  protected _right: BSTNode<T, U> | null;
 
   /** Parent node
-   * @private
+   * @protected
    */
-  private _parent: BSTNode<T, U> | null;
+  protected _parent: BSTNode<T, U> | null;
 
   /**
    * Creates a nodeb

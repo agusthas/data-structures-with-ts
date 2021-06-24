@@ -13,10 +13,10 @@ import BSTNode from './BSTNode';
  * const bst = new BinarySearchTree<number , string>();
  * ```
  */
-export default class BST<T extends number | string, U = any> {
-  private _root: BSTNode<T, U> | null;
+export default class BST<T extends number | string, U = undefined> {
+  protected _root: BSTNode<T, U> | null;
 
-  private _count: number;
+  protected _count: number;
 
   constructor() {
     this._root = null;
