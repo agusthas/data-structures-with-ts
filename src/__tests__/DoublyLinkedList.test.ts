@@ -1,4 +1,4 @@
-import { DoublyLinkedList, DoublyNode } from '../DoublyLinkedList';
+import { DoublyLinkedList, DoublyNode } from '../LinkedList';
 
 describe('DoublyNode unit tests', () => {
   const n1 = new DoublyNode<number>(1);

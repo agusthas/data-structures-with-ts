@@ -5,33 +5,33 @@
  * const node = new BinarySearchTreeNode(2, 'hello');
  * ```
  */
-export default class BinarySearchTreeNode<T extends number | string, U = any> {
+export default class BSTNode<T extends number | string, U = undefined> {
   /**
    * Key representing the hiearchy
-   * @private
+   * @protected
    */
-  private _key: T;
+  protected _key: T;
 
   /**
    * Value of the node
-   * @private
+   * @protected
    */
-  private _value: U;
+  protected _value: U;
 
   /** Left child node
-   * @private
+   * @protected
    */
-  private _left: BinarySearchTreeNode<T, U> | null;
+  protected _left: BSTNode<T, U> | null;
 
   /** Right child node
-   * @private
+   * @protected
    */
-  private _right: BinarySearchTreeNode<T, U> | null;
+  protected _right: BSTNode<T, U> | null;
 
   /** Parent node
-   * @private
+   * @protected
    */
-  private _parent: BinarySearchTreeNode<T, U> | null;
+  protected _parent: BSTNode<T, U> | null;
 
   /**
    * Creates a nodeb
@@ -51,9 +51,9 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
    * Set node key and returns the instance.
    * @public
    * @param key - New node key.
-   * @returns {BinarySearchTreeNode<T, U>}
+   * @returns {BSTNode<T, U>}
    */
-  setKey(key: T): BinarySearchTreeNode<T, U> {
+  setKey(key: T): BSTNode<T, U> {
     this._key = key;
     return this;
   }
@@ -71,9 +71,9 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
    * Sets node value and returns the instance.
    * @public
    * @param value - New node value.
-   * @returns {BinarySearchTreeNode<T, U>}
+   * @returns {BSTNode<T, U>}
    */
-  setValue(value: U): BinarySearchTreeNode<T, U> {
+  setValue(value: U): BSTNode<T, U> {
     this._value = value;
     return this;
   }
@@ -91,8 +91,8 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
    * Set left child node and returns the instance.
    * @param left - New Node to be inserted to the left, if given a node does not match type will throw an error.
    */
-  setLeft(left: BinarySearchTreeNode<T, U> | null): BinarySearchTreeNode<T, U> {
-    if (left && !(left instanceof BinarySearchTreeNode)) {
+  setLeft(left: BSTNode<T, U> | null): BSTNode<T, U> {
+    if (left && !(left instanceof BSTNode)) {
       throw new Error('setLeft expects a BSTNode or null');
     }
 
@@ -103,9 +103,9 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
   /**
    * Returns the left child
    * @public
-   * @returns {BinarySearchTreeNode<T, U> | null}
+   * @returns {BSTNode<T, U> | null}
    */
-  getLeft(): BinarySearchTreeNode<T, U> | null {
+  getLeft(): BSTNode<T, U> | null {
     return this._left;
   }
 
@@ -115,17 +115,15 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
    * @returns {boolean}
    */
   hasLeft(): boolean {
-    return this._left instanceof BinarySearchTreeNode;
+    return this._left instanceof BSTNode;
   }
 
   /**
    * Set right child node and returns the instance.
    * @param right - New Node to be inserted to the right, if given a node does not match type will throw an error.
    */
-  setRight(
-    right: BinarySearchTreeNode<T, U> | null
-  ): BinarySearchTreeNode<T, U> {
-    if (right && !(right instanceof BinarySearchTreeNode)) {
+  setRight(right: BSTNode<T, U> | null): BSTNode<T, U> {
+    if (right && !(right instanceof BSTNode)) {
       throw new Error('setright expects a BSTNode or null');
     }
 
@@ -136,9 +134,9 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
   /**
    * Returns the right child
    * @public
-   * @returns {BinarySearchTreeNode<T, U> | null}
+   * @returns {BSTNode<T, U> | null}
    */
-  getRight(): BinarySearchTreeNode<T, U> | null {
+  getRight(): BSTNode<T, U> | null {
     return this._right;
   }
 
@@ -148,17 +146,15 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
    * @returns {boolean}
    */
   hasRight(): boolean {
-    return this._right instanceof BinarySearchTreeNode;
+    return this._right instanceof BSTNode;
   }
 
   /**
    * Set parent node and returns the instance.
    * @param parent - New Node to be inserted to the parent, if given a node does not match type will throw an error.
    */
-  setParent(
-    parent: BinarySearchTreeNode<T, U> | null
-  ): BinarySearchTreeNode<T, U> {
-    if (parent && !(parent instanceof BinarySearchTreeNode)) {
+  setParent(parent: BSTNode<T, U> | null): BSTNode<T, U> {
+    if (parent && !(parent instanceof BSTNode)) {
       throw new Error('setparent expects a BSTNode or null');
     }
 
@@ -169,9 +165,9 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
   /**
    * Returns the parent
    * @public
-   * @returns {BinarySearchTreeNode<T, U> | null}
+   * @returns {BSTNode<T, U> | null}
    */
-  getParent(): BinarySearchTreeNode<T, U> | null {
+  getParent(): BSTNode<T, U> | null {
     return this._parent;
   }
 
@@ -181,7 +177,7 @@ export default class BinarySearchTreeNode<T extends number | string, U = any> {
    * @returns {boolean}
    */
   hasParent(): boolean {
-    return this._parent instanceof BinarySearchTreeNode;
+    return this._parent instanceof BSTNode;
   }
 
   /**

@@ -1,20 +1,20 @@
-import { BinarySearchTree, BinarySearchTreeNode } from '../BinarySearchTree';
+import { BSTNode, BST } from '../Tree';
 
 describe('BST Tests', () => {
-  const bst = new BinarySearchTree<number, string | undefined>();
+  const bst = new BST<number, string | undefined>();
 
   describe('.insert(key, value)', () => {
     it('should insert nodes to the tree', () => {
-      expect(bst.insert(50, 'n1')).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.insert(80, 'n2')).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.insert(30, 'n3')).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.insert(90, 'n4')).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.insert(60, 'n5')).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.insert(40, 'n6')).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.insert(20, 'n20')).toBeInstanceOf(BinarySearchTreeNode);
+      expect(bst.insert(50, 'n1')).toBeInstanceOf(BSTNode);
+      expect(bst.insert(80, 'n2')).toBeInstanceOf(BSTNode);
+      expect(bst.insert(30, 'n3')).toBeInstanceOf(BSTNode);
+      expect(bst.insert(90, 'n4')).toBeInstanceOf(BSTNode);
+      expect(bst.insert(60, 'n5')).toBeInstanceOf(BSTNode);
+      expect(bst.insert(40, 'n6')).toBeInstanceOf(BSTNode);
+      expect(bst.insert(20, 'n20')).toBeInstanceOf(BSTNode);
 
       // updates value of existing node
-      expect(bst.insert(20, 'n7')).toBeInstanceOf(BinarySearchTreeNode);
+      expect(bst.insert(20, 'n7')).toBeInstanceOf(BSTNode);
       expect(bst.find(20)!.getValue()).toStrictEqual('n7');
     });
   });
@@ -51,13 +51,13 @@ describe('BST Tests', () => {
 
   describe('.find(key)', () => {
     it('should search a node by its key in the tree', () => {
-      expect(bst.find(50)!).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.find(80)!).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.find(30)!).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.find(90)!).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.find(50)!).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.find(40)!).toBeInstanceOf(BinarySearchTreeNode);
-      expect(bst.find(20)!).toBeInstanceOf(BinarySearchTreeNode);
+      expect(bst.find(50)!).toBeInstanceOf(BSTNode);
+      expect(bst.find(80)!).toBeInstanceOf(BSTNode);
+      expect(bst.find(30)!).toBeInstanceOf(BSTNode);
+      expect(bst.find(90)!).toBeInstanceOf(BSTNode);
+      expect(bst.find(50)!).toBeInstanceOf(BSTNode);
+      expect(bst.find(40)!).toBeInstanceOf(BSTNode);
+      expect(bst.find(20)!).toBeInstanceOf(BSTNode);
       expect(bst.find(100)!).toStrictEqual(null);
     });
   });
