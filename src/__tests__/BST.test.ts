@@ -1,4 +1,4 @@
-import { BST, BSTNode } from '../Tree';
+import { BST } from '../Tree';
 
 const randInRange = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -38,18 +38,18 @@ describe('BST unit tests', () => {
     const emptyBst = new BST<number, string>();
     it('should get minimum', () => {
       const results = buildTree();
-      const minimum = results.shift();
+      const minimum = results.shift()!.key;
 
-      expect(bst.minimum()).toStrictEqual(minimum);
+      expect(bst.minimum()?.key).toStrictEqual(minimum);
 
       expect(emptyBst.minimum()).toBeNull();
     });
 
     it('should get maximum', () => {
       const results = buildTree();
-      const maximum = results.pop();
+      const maximum = results.pop()!.key;
 
-      expect(bst.maximum()).toStrictEqual(maximum);
+      expect(bst.maximum()?.key).toStrictEqual(maximum);
 
       expect(emptyBst.maximum()).toBeNull();
     });
@@ -109,10 +109,10 @@ describe('BST unit tests', () => {
     it('should find an element', () => {
       const results = buildTree();
       const randIndex = randInRange(0, results.length);
-      const { key: rKey } = results[randIndex];
+      const rKey = results[randIndex]!.key;
 
-      expect(bst.find(rKey)).toStrictEqual(
-        results.find(({ key }) => key === rKey)
+      expect(bst.find(rKey)!.key).toStrictEqual(
+        results.find(({ key }) => key === rKey)!.key
       );
 
       expect(bst.find(1000)).toBeNull();
@@ -121,11 +121,13 @@ describe('BST unit tests', () => {
     it('should has an element', () => {
       const results = buildTree();
       const randIndex = randInRange(0, results.length);
-      const { key: rKey } = results[randIndex];
+      const rKey = results[randIndex]!.key;
 
-      expect(bst.has(rKey)).toBe(true);
+      expect(bst.has(rKey)).toStrictEqual(
+        !!results.find(({ key }) => key === rKey)
+      );
 
-      expect(bst.has(1000)).toBe(false);
+      expect(bst.has(1000)).toBeFalsy();
     });
   });
 
