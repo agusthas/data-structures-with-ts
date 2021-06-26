@@ -1,7 +1,11 @@
 import BSTNode from './BSTNode';
 
 export default class BST<T extends number | string, U = undefined> {
-  _root: BSTNode<T, U> | null = null;
+  protected _root: BSTNode<T, U> | null = null;
+
+  root() {
+    return this._root;
+  }
 
   clear() {
     this._root = null;
