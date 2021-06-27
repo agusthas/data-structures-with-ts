@@ -4,7 +4,7 @@ A simple collection of data structures built with typescript.
 
 ## Documentation
 
-[Documentation](https://agusthas/data-structures-with-ts/)
+[Documentation](https://agusthas.github.io/data-structures-with-ts/)
 
 ## Test locally
 
