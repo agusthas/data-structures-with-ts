@@ -7,4 +7,4 @@ export {
   LinkedListSort,
   LinkedListNode,
 } from './LinkedList';
-export { BST, BSTNode } from './Tree';
+export { BST, AVL } from './Tree';

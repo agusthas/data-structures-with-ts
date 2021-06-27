@@ -5,7 +5,7 @@ export default class AVL<T extends number | string, U = undefined> extends BST<
   T,
   U
 > {
-  private _getHeight(current: AVLNode<T, U> | null) {
+  private _getNodeHeight(current: AVLNode<T, U> | null) {
     if (!current) {
       return 0;
     }
@@ -13,57 +13,43 @@ export default class AVL<T extends number | string, U = undefined> extends BST<
     return current.height;
   }
 
+  private _updateHeight(current: AVLNode<T, U>) {
+    const left = current.left as AVLNode<T, U>;
+    const right = current.right as AVLNode<T, U>;
+    return Math.max(this._getNodeHeight(left), this._getNodeHeight(right)) + 1;
+  }
+
   private _rotateLeft(current: AVLNode<T, U>) {
-    let right = current.right! as AVLNode<T, U>;
+    let right = current.right as AVLNode<T, U>;
     let rightLeft = right.left as AVLNode<T, U>;
 
     right!.left = current;
     current.right = rightLeft;
 
-    current.height =
-      Math.max(
-        this._getHeight(current.left as AVLNode<T, U>),
-        this._getHeight(current.right as AVLNode<T, U>)
-      ) + 1;
-    right.height =
-      Math.max(
-        this._getHeight(right.left as AVLNode<T, U>),
-        this._getHeight(right.right as AVLNode<T, U>)
-      ) + 1;
+    current.height = this._updateHeight(current);
+    right.height = this._updateHeight(right);
 
     return right;
   }
 
   private _rotateRight(current: AVLNode<T, U>) {
-    let left = current.left! as AVLNode<T, U>;
+    let left = current.left as AVLNode<T, U>;
     let leftRight = left.right as AVLNode<T, U>;
 
     left.right = current;
     current.left = leftRight;
 
-    current.height =
-      Math.max(
-        this._getHeight(current.left as AVLNode<T, U>),
-        this._getHeight(current.right as AVLNode<T, U>)
-      ) + 1;
-    left.height =
-      Math.max(
-        this._getHeight(left.left as AVLNode<T, U>),
-        this._getHeight(left.right as AVLNode<T, U>)
-      ) + 1;
+    current.height = this._updateHeight(current);
+    left.height = this._updateHeight(left);
 
     return left;
   }
 
   private _getBalanceFactor(current: AVLNode<T, U>) {
-    if (!current) {
-      return 0;
-    }
+    let left = current.left as AVLNode<T, U>;
+    let right = current.right as AVLNode<T, U>;
 
-    return (
-      this._getHeight(current.left as AVLNode<T, U>) -
-      this._getHeight(current.right as AVLNode<T, U>)
-    );
+    return this._getNodeHeight(left) - this._getNodeHeight(right);
   }
 
   private _balance(current: AVLNode<T, U>) {
@@ -71,11 +57,7 @@ export default class AVL<T extends number | string, U = undefined> extends BST<
       return null;
     }
 
-    current.height =
-      Math.max(
-        this._getHeight(current.left as AVLNode<T, U>),
-        this._getHeight(current.right as AVLNode<T, U>)
-      ) + 1;
+    current.height = this._updateHeight(current);
     let bf = this._getBalanceFactor(current);
 
     if (bf < -1) {
@@ -87,7 +69,7 @@ export default class AVL<T extends number | string, U = undefined> extends BST<
       }
     } else if (bf > 1) {
       if (this._getBalanceFactor(current.left as AVLNode<T, U>) >= 0) {
-        return this._rotateRight(current.left as AVLNode<T, U>);
+        return this._rotateRight(current);
       } else {
         current.left = this._rotateLeft(current.left as AVLNode<T, U>);
         return this._rotateRight(current);
@@ -176,31 +158,5 @@ export default class AVL<T extends number | string, U = undefined> extends BST<
     };
 
     this._root = removeRecursive(this._root as AVLNode<T, U>, key);
-  }
-
-  debugging() {
-    const printDebug = (
-      current: AVLNode<T, U> | null,
-      indent: string,
-      last: boolean
-    ): void => {
-      if (current) {
-        process.stdout.write(indent);
-
-        if (last) {
-          process.stdout.write('R----');
-          indent += '    ';
-        } else {
-          process.stdout.write('L----');
-          indent += '|   ';
-        }
-        process.stdout.write(`${current.key} | ${current.height}\n`);
-        printDebug(current!.left as AVLNode<T, U>, indent, false);
-        printDebug(current.right as AVLNode<T, U>, indent, true);
-      }
-    };
-
-    process.stdout.write('\n');
-    printDebug(this._root as AVLNode<T, U>, '', true);
   }
 }
