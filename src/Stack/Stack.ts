@@ -15,7 +15,7 @@
  */
 export default class Stack<T = unknown> {
   /**
-   * Private elements of Stack class
+   * Elements of Stack
    * @private
    */
   private _elements: T[];
