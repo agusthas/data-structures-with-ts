@@ -129,9 +129,8 @@ abstract class LLTemplate<T> {
 
   /**
    * Traverse the list and applying callback function for each node.
-   * @param cb - Callback function
    */
-  forEach(cb: (node: LLNode<T>, pos: number) => unknown): void {
+  forEach(cb: (node: LLNode<T>, pos: number) => void): void {
     let curr = this._head;
     let currPos = 0;
     while (curr) {
@@ -143,9 +142,8 @@ abstract class LLTemplate<T> {
 
   /**
    * Find the _first_ node that meets the condition specified in the callback function.
-   * @param cb - Callback function.
    */
-  find(cb: (node: LLNode<T>, pos: number) => unknown): Node<T> {
+  find(cb: (node: LLNode<T>, pos: number) => boolean): Node<T> {
     let curr = this._head;
     let currPos = 0;
     while (curr) {
@@ -158,12 +156,6 @@ abstract class LLTemplate<T> {
 
     return null;
   }
-
-  /**
-   * Returns a new instance with filtered nodes that meets the condition specified in the callback function.
-   * @param cb - Callback function.
-   */
-  abstract filter(cb: (node: LLNode<T>, pos: number) => unknown): LLTemplate<T>;
 
   /**
    * Reverse elements of the array and returns the head pointer. Calling this function will **mutate** the list.
@@ -275,6 +267,10 @@ export default class LinkedList<T> extends LLTemplate<T> {
     return prev.getNext()!;
   }
 
+  /**
+   * Returns a new instance with filtered nodes that meets the condition specified in the callback function.
+   * @param cb - Callback function.
+   */
   filter(cb: (node: LLNode<T>, pos: number) => unknown) {
     // creates a new Linked List
     const filtered = new LinkedList<T>();
@@ -325,6 +321,10 @@ export class LinkedListSort<T extends number | string> extends LLTemplate<T> {
     return this._head!;
   }
 
+  /**
+   * Returns a new instance with filtered nodes that meets the condition specified in the callback function.
+   * @param cb - Callback function.
+   */
   filter(cb: (node: LinkedListNode<T>, pos: number) => unknown): LLTemplate<T> {
     // creates a new Linked List
     const filtered = new LinkedListSort<T>();
