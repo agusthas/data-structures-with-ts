@@ -7,7 +7,8 @@
     "ts-node": "ts-node src/app.ts",
     "test": "jest",
     "dev": "jest --watch",
-    "build": "npm run test && tsc"
+    "build": "npm run test && tsc",
+    "docs": "typedoc"
   },
   "keywords": [
     "data-structures",

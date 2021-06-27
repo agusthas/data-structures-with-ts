@@ -1,0 +1,8 @@
+{
+  "name": "Data Structure With Typescripts",
+  "readme": "./README.md",
+  "entryPoints": ["./src/index.ts"],
+  "out": "docs",
+  "excludePrivate": true,
+  "excludeProtected": true
+}
